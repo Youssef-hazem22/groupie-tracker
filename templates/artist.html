@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{.Artist.Name}} · Groupie Trackers</title>
+    <link rel="stylesheet" href="/styling.css">
+</head>
+
+<body>
+
+    <header class="site-header">
+        <h1>Groupie Trackers</h1>
+    </header>
+
+    <main>
+
+        <section class="artist-detail">
+
+            <img class="artist-photo" src="{{.Artist.Image}}" alt="{{.Artist.Name}}">
+
+            <div class="artist-info">
+
+                
+                <h2>{{.Artist.Name}}</h2>
+
+                <dl>
+                    <dt>Active since</dt>
+                    <dd>{{.Artist.CreationDate}}</dd>
+
+                    <dt>First album</dt>
+                    <dd>{{.Artist.FirstAlbum}}</dd>
+                </dl>
+
+                <h3>Members</h3>
+
+                <ol class="members">
+                    {{range .Artist.Members}}
+                        <li>{{.}}</li>
+                    {{end}}
+                </ol>
+
+                <h3>Concerts</h3>
+
+                {{if .Concerts}}
+
+                    {{range $location, $dates := .Concerts}}
+
+                        <div class="concert">
+                            <h4>{{$location}}</h4>
+
+                            <ul>
+                                {{range $dates}}
+                                    <li>{{.}}</li>
+                                {{end}}
+                            </ul>
+                        </div>
+
+                    {{end}}
+
+                {{else}}
+
+                    <p>No concert information available.</p>
+
+                {{end}}
+
+            </div>
+
+        </section>
+
+    </main>
+
+</body>
+</html>
