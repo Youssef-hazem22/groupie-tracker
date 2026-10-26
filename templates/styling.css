@@ -1,7 +1,11 @@
 :root {
   --bg: #0e0f1a;
   --surface: #181a2b;
+<<<<<<< HEAD
   --border: rgba(255, 255, 255, 0.08);
+=======
+  --border: rgba(255,255,255, 0.08);
+>>>>>>> origin/master
   --text: #eef0ff;
   --head: #8b5cf6;
   --radius: 16px;
@@ -15,19 +19,29 @@
 body {
   min-height: 100vh;
   color: var(--text);
+<<<<<<< HEAD
   background: var(--bg);
   font-family: Arial, sans-serif;
 }
 
 /* Header */
 
+=======
+  background:var(--bg);
+}
+
+>>>>>>> origin/master
 .site-header {
   position: sticky;
   top: 0;
   z-index: 10;
   padding: 20px;
   text-align: center;
+<<<<<<< HEAD
   background: black;
+=======
+  background:black;
+>>>>>>> origin/master
   border-bottom: 1px solid var(--border);
 }
 
@@ -35,45 +49,71 @@ body {
   font-size: clamp(1.6rem, 4vw, 2.4rem);
   font-weight: 800;
   letter-spacing: 1px;
+<<<<<<< HEAD
   color: var(--head);
 }
 
 /* Main Content */
 
+=======
+  background-clip: text;
+  color: var(--head);
+}
+
+>>>>>>> origin/master
 main {
   width: 100%;
   max-width: 1200px;
   margin: 0 auto;
   padding: 30px 25px 50px;
+<<<<<<< HEAD
 }
 
 /* Homepage Artist Grid */
+=======
+
+}
+>>>>>>> origin/master
 
 .artist-grid {
   list-style: none;
   padding: 0;
   --columns: 4;
   display: grid;
+<<<<<<< HEAD
   grid-template-columns: repeat(var(--columns), minmax(0, 1fr));
+=======
+  grid-template-columns:
+    repeat(var(--columns), minmax(0, 1fr));
+>>>>>>> origin/master
   gap: 24px;
 }
 
 .artist-card {
+<<<<<<< HEAD
   overflow: hidden;
   border: 1px solid var(--border);
   border-radius: var(--radius);
   transition: transform 0.3s ease, border-color 0.3s ease;
+=======
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+>>>>>>> origin/master
 }
 
 .artist-card:hover {
   transform: translateY(-6px);
   border-color: rgba(139, 92, 246, 0.6);
+<<<<<<< HEAD
 }
 
 .artist-card a {
   display: block;
   color: inherit;
   text-decoration: none;
+=======
+
+>>>>>>> origin/master
 }
 
 .artist-card .thumb {
@@ -81,10 +121,15 @@ main {
 }
 
 .artist-card img {
+<<<<<<< HEAD
   display: block;
   width: 100%;
   aspect-ratio: 1 / 1;
   object-fit: cover;
+=======
+  width: 100%;
+  aspect-ratio: 1 / 1;
+>>>>>>> origin/master
   transition: transform 0.4s ease;
 }
 
@@ -98,6 +143,7 @@ main {
   font-size: 1.05rem;
   font-weight: 600;
   text-align: center;
+<<<<<<< HEAD
   background: var(--surface);
 }
 
@@ -194,17 +240,24 @@ main {
   margin: 15px 0;
   line-height: 1.6;
 }
+=======
+}
+
+>>>>>>> origin/master
 
 @media (max-width: 1024px) {
   .artist-grid {
     --columns: 3;
   }
+<<<<<<< HEAD
 
   .artist-detail {
     grid-template-columns: 230px minmax(0, 1fr);
     gap: 24px;
     padding: 24px;
   }
+=======
+>>>>>>> origin/master
 }
 
 @media (max-width: 720px) {
@@ -221,6 +274,7 @@ main {
     padding: 10px 12px 12px;
     font-size: 0.95rem;
   }
+<<<<<<< HEAD
 
   .artist-detail {
     grid-template-columns: 1fr;
@@ -246,12 +300,15 @@ main {
   .artist-info td {
     padding: 10px;
   }
+=======
+>>>>>>> origin/master
 }
 
 @media (max-width: 420px) {
   .artist-grid {
     --columns: 1;
   }
+<<<<<<< HEAD
 
   .artist-detail {
     padding: 14px;
@@ -269,4 +326,6 @@ main {
   .artist-info td {
     padding: 8px;
   }
+=======
+>>>>>>> origin/master
 }

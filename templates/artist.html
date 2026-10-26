@@ -21,6 +21,7 @@
 
             <div class="artist-info">
 
+<<<<<<< HEAD
                 <h2>{{.Artist.Name}}</h2>
 
                 <!-- Artist Information Table -->
@@ -80,6 +81,44 @@
                             {{end}}
                         </tbody>
                     </table>
+=======
+                
+                <h2>{{.Artist.Name}}</h2>
+
+                <dl>
+                    <dt>Active since</dt>
+                    <dd>{{.Artist.CreationDate}}</dd>
+
+                    <dt>First album</dt>
+                    <dd>{{.Artist.FirstAlbum}}</dd>
+                </dl>
+
+                <h3>Members</h3>
+
+                <ol class="members">
+                    {{range .Artist.Members}}
+                        <li>{{.}}</li>
+                    {{end}}
+                </ol>
+
+                <h3>Concerts</h3>
+
+                {{if .Concerts}}
+
+                    {{range $location, $dates := .Concerts}}
+
+                        <div class="concert">
+                            <h4>{{$location}}</h4>
+
+                            <ul>
+                                {{range $dates}}
+                                    <li>{{.}}</li>
+                                {{end}}
+                            </ul>
+                        </div>
+
+                    {{end}}
+>>>>>>> origin/master
 
                 {{else}}
 
@@ -94,4 +133,8 @@
     </main>
 
 </body>
+<<<<<<< HEAD
 </html>
+=======
+</html>
+>>>>>>> origin/master
