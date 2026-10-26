@@ -2,29 +2,20 @@ package main
 
 import (
 	"encoding/json"
-<<<<<<< HEAD
 	"fmt"
-=======
->>>>>>> origin/master
 	"html/template"
 	"net/http"
 	"strconv"
 	"strings"
 	"sync"
-<<<<<<< HEAD
 	"time"
-=======
->>>>>>> origin/master
 )
 
 const (
 	artisturl    = "https://groupietrackers.herokuapp.com/api/artists"
 	relationsurl = "https://groupietrackers.herokuapp.com/api/relation"
-<<<<<<< HEAD
 	locationurl  = "https://groupietrackers.01edu.ai/api/locations"
 	datesurl     = "https://groupietrackers.01edu.ai/api/dates"
-=======
->>>>>>> origin/master
 )
 
 var (
@@ -32,19 +23,7 @@ var (
 	tmpl       *template.Template
 	artistTmpl *template.Template
 	relations  map[int]Relation
-<<<<<<< HEAD
 	client     = &http.Client{Timeout: 10 * time.Second}
-)
-
-func fetchArtists() ([]Artist, error) {
-	resp, err := client.Get(artisturl)
-	if err != nil {
-		return nil, err
-	}
-	if resp.StatusCode != http.StatusOK {
-		return nil, fmt.Errorf("unexpected code : %s", resp.Status)
-	}
-=======
 )
 
 func fetchArtists() ([]Artist, error) {
@@ -52,7 +31,6 @@ func fetchArtists() ([]Artist, error) {
 	if err != nil {
 		return nil, err
 	}
->>>>>>> origin/master
 	defer resp.Body.Close()
 
 	err = json.NewDecoder(resp.Body).Decode(&artists)
@@ -63,7 +41,6 @@ func fetchArtists() ([]Artist, error) {
 	return artists, nil
 }
 func fetchRelations() ([]Relation, error) {
-<<<<<<< HEAD
 	resp, err := client.Get(relationsurl)
 	if err != nil {
 		return nil, err
@@ -71,12 +48,6 @@ func fetchRelations() ([]Relation, error) {
 	if resp.StatusCode != http.StatusOK {
 		return nil, fmt.Errorf("unexpected code : %s", resp.Status)
 	}
-=======
-	resp, err := http.Get(relationsurl)
-	if err != nil {
-		return nil, err
-	}
->>>>>>> origin/master
 	defer resp.Body.Close()
 	var RELATION RelationsIndex
 	err = json.NewDecoder(resp.Body).Decode(&RELATION)
@@ -146,12 +117,9 @@ func indexhandler(w http.ResponseWriter, r *http.Request) {
 		http.Error(w, "404 not found.", http.StatusNotFound)
 		return
 	}
-<<<<<<< HEAD
 	if r.Method != http.MethodGet {
 		http.Error(w, "405 methodnotallowed", http.StatusMethodNotAllowed)
 	}
-=======
->>>>>>> origin/master
 
 	if err := tmpl.Execute(w, artists); err != nil {
 		http.Error(w, "500 internal server error", http.StatusInternalServerError)
@@ -171,12 +139,9 @@ func artistHandler(w http.ResponseWriter, r *http.Request) {
 		http.Error(w, "404 not found.", http.StatusNotFound)
 		return
 	}
-<<<<<<< HEAD
 	if r.Method != http.MethodGet {
 		http.Error(w, "405 methodnotallowed", http.StatusMethodNotAllowed)
 	}
-=======
->>>>>>> origin/master
 	artistid := r.URL.Query().Get("id")
 	Artistidint, err := strconv.Atoi(artistid)
 	if err != nil {
