@@ -27,7 +27,7 @@ var (
 )
 
 func fetchArtists() ([]Artist, error) {
-	resp, err := http.Get(artisturl)
+	resp, err := client.Get(artisturl)
 	if err != nil {
 		return nil, err
 	}
