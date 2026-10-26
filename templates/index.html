@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Groupie Trackers</title>
+    <link rel="stylesheet" href="/styling.css">
+</head>
+<body>
+    <header class="site-header">
+        <h1>Groupie Trackers</h1>
+    </header>
+
+    <main>
+        <ul class="artist-grid">
+            {{range .}}
+            <li class="artist-card">
+                <a href="/artist?id={{.ID}}">
+                    <div class="thumb">
+                        <img src="{{.Image}}" alt="{{.Name}}">
+                    </div>
+                    <h2 class="artist-name">{{.Name}}</h2>
+                </a>
+            </li>
+            {{end}}
+        </ul>
+    </main>
+</body>
+</html>

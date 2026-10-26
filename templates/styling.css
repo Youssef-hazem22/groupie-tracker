@@ -1,0 +1,272 @@
+:root {
+  --bg: #0e0f1a;
+  --surface: #181a2b;
+  --border: rgba(255, 255, 255, 0.08);
+  --text: #eef0ff;
+  --head: #8b5cf6;
+  --radius: 16px;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+}
+
+body {
+  min-height: 100vh;
+  color: var(--text);
+  background: var(--bg);
+  font-family: Arial, sans-serif;
+}
+
+/* Header */
+
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  padding: 20px;
+  text-align: center;
+  background: black;
+  border-bottom: 1px solid var(--border);
+}
+
+.site-header h1 {
+  font-size: clamp(1.6rem, 4vw, 2.4rem);
+  font-weight: 800;
+  letter-spacing: 1px;
+  color: var(--head);
+}
+
+/* Main Content */
+
+main {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 30px 25px 50px;
+}
+
+/* Homepage Artist Grid */
+
+.artist-grid {
+  list-style: none;
+  padding: 0;
+  --columns: 4;
+  display: grid;
+  grid-template-columns: repeat(var(--columns), minmax(0, 1fr));
+  gap: 24px;
+}
+
+.artist-card {
+  overflow: hidden;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  transition: transform 0.3s ease, border-color 0.3s ease;
+}
+
+.artist-card:hover {
+  transform: translateY(-6px);
+  border-color: rgba(139, 92, 246, 0.6);
+}
+
+.artist-card a {
+  display: block;
+  color: inherit;
+  text-decoration: none;
+}
+
+.artist-card .thumb {
+  overflow: hidden;
+}
+
+.artist-card img {
+  display: block;
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  object-fit: cover;
+  transition: transform 0.4s ease;
+}
+
+.artist-card:hover img {
+  transform: scale(1.05);
+}
+
+.artist-name {
+  margin: 0;
+  padding: 14px 16px 16px;
+  font-size: 1.05rem;
+  font-weight: 600;
+  text-align: center;
+  background: var(--surface);
+}
+
+/* Artist Details Page */
+
+.artist-detail {
+  display: grid;
+  grid-template-columns: 280px minmax(0, 1fr);
+  gap: 30px;
+  align-items: start;
+  margin-top: 20px;
+  padding: 30px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+}
+
+.artist-photo {
+  display: block;
+  width: 100%;
+  max-width: 280px;
+  aspect-ratio: 1 / 1;
+  object-fit: cover;
+  border-radius: var(--radius);
+}
+
+.artist-info {
+  min-width: 0;
+}
+
+.artist-info h2 {
+  margin-bottom: 20px;
+  font-size: 2rem;
+  color: var(--head);
+  overflow-wrap: anywhere;
+}
+
+.artist-info h3 {
+  margin: 25px 0 12px;
+  font-size: 1.3rem;
+  color: var(--head);
+}
+
+/* Artist Information and Concert Tables */
+
+.artist-info table {
+  width: 100%;
+  margin: 15px 0 25px;
+  border-collapse: collapse;
+  background: var(--bg);
+  border: 1px solid var(--border);
+  table-layout: fixed;
+}
+
+.artist-info th,
+.artist-info td {
+  padding: 14px;
+  text-align: left;
+  vertical-align: top;
+  border: 1px solid var(--border);
+  overflow-wrap: anywhere;
+}
+
+.artist-info th {
+  background: #22243a;
+  color: var(--head);
+  font-weight: 700;
+}
+
+.artist-info td {
+  color: var(--text);
+}
+
+.artist-info .members,
+.artist-info .concert-dates {
+  padding-left: 20px;
+  margin: 0;
+  line-height: 1.8;
+}
+
+.artist-info .location {
+  text-transform: capitalize;
+}
+
+.artist-info table thead th:first-child {
+  width: 40%;
+}
+
+.artist-info table thead th:last-child {
+  width: 60%;
+}
+
+.artist-info p {
+  margin: 15px 0;
+  line-height: 1.6;
+}
+
+@media (max-width: 1024px) {
+  .artist-grid {
+    --columns: 3;
+  }
+
+  .artist-detail {
+    grid-template-columns: 230px minmax(0, 1fr);
+    gap: 24px;
+    padding: 24px;
+  }
+}
+
+@media (max-width: 720px) {
+  main {
+    padding: 20px 16px 32px;
+  }
+
+  .artist-grid {
+    --columns: 2;
+    gap: 16px;
+  }
+
+  .artist-name {
+    padding: 10px 12px 12px;
+    font-size: 0.95rem;
+  }
+
+  .artist-detail {
+    grid-template-columns: 1fr;
+    gap: 20px;
+    padding: 20px;
+  }
+
+  .artist-photo {
+    max-width: 220px;
+    margin: 0 auto;
+  }
+
+  .artist-info h2 {
+    font-size: 1.6rem;
+  }
+
+  .artist-info table {
+    margin-bottom: 20px;
+    font-size: 0.9rem;
+  }
+
+  .artist-info th,
+  .artist-info td {
+    padding: 10px;
+  }
+}
+
+@media (max-width: 420px) {
+  .artist-grid {
+    --columns: 1;
+  }
+
+  .artist-detail {
+    padding: 14px;
+  }
+
+  .artist-info h2 {
+    font-size: 1.4rem;
+  }
+
+  .artist-info table {
+    font-size: 0.8rem;
+  }
+
+  .artist-info th,
+  .artist-info td {
+    padding: 8px;
+  }
+}

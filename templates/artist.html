@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{.Artist.Name}} · Groupie Trackers</title>
+    <link rel="stylesheet" href="/styling.css">
+</head>
+
+<body>
+
+    <header class="site-header">
+        <h1>Groupie Trackers</h1>
+    </header>
+
+    <main>
+
+        <section class="artist-detail">
+
+            <img class="artist-photo" src="{{.Artist.Image}}" alt="{{.Artist.Name}}">
+
+            <div class="artist-info">
+
+                <h2>{{.Artist.Name}}</h2>
+
+                <!-- Artist Information Table -->
+                <h3>Artist Information</h3>
+
+                <table>
+                    <tbody>
+                        <tr>
+                            <th>Active Since</th>
+                            <td>{{.Artist.CreationDate}}</td>
+                        </tr>
+
+                        <tr>
+                            <th>First Album</th>
+                            <td>{{.Artist.FirstAlbum}}</td>
+                        </tr>
+
+                        <tr>
+                            <th>Members</th>
+                            <td>
+                                <ul class="members">
+                                    {{range .Artist.Members}}
+                                        <li>{{.}}</li>
+                                    {{end}}
+                                </ul>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <!-- Concert Information Table -->
+                <h3>Concert Information</h3>
+
+                {{if .Concerts}}
+
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Location</th>
+                                <th>Concert Dates</th>
+                            </tr>
+                        </thead>
+
+                        <tbody>
+                            {{range $location, $dates := .Concerts}}
+                                <tr>
+                                    <td class="location">{{$location}}</td>
+
+                                    <td>
+                                        <ul class="concert-dates">
+                                            {{range $dates}}
+                                                <li>{{.}}</li>
+                                            {{end}}
+                                        </ul>
+                                    </td>
+                                </tr>
+                            {{end}}
+                        </tbody>
+                    </table>
+
+                {{else}}
+
+                    <p>No concert information available.</p>
+
+                {{end}}
+
+            </div>
+
+        </section>
+
+    </main>
+
+</body>
+</html>
