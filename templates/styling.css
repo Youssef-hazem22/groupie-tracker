@@ -1,11 +1,7 @@
 :root {
   --bg: #0e0f1a;
   --surface: #181a2b;
-<<<<<<< HEAD
-  --border: rgba(255, 255, 255, 0.08);
-=======
   --border: rgba(255,255,255, 0.08);
->>>>>>> origin/master
   --text: #eef0ff;
   --head: #8b5cf6;
   --radius: 16px;
@@ -19,29 +15,16 @@
 body {
   min-height: 100vh;
   color: var(--text);
-<<<<<<< HEAD
-  background: var(--bg);
-  font-family: Arial, sans-serif;
-}
-
-/* Header */
-
-=======
   background:var(--bg);
 }
 
->>>>>>> origin/master
 .site-header {
   position: sticky;
   top: 0;
   z-index: 10;
   padding: 20px;
   text-align: center;
-<<<<<<< HEAD
-  background: black;
-=======
   background:black;
->>>>>>> origin/master
   border-bottom: 1px solid var(--border);
 }
 
@@ -49,71 +32,37 @@ body {
   font-size: clamp(1.6rem, 4vw, 2.4rem);
   font-weight: 800;
   letter-spacing: 1px;
-<<<<<<< HEAD
-  color: var(--head);
-}
-
-/* Main Content */
-
-=======
   background-clip: text;
   color: var(--head);
 }
 
->>>>>>> origin/master
 main {
   width: 100%;
   max-width: 1200px;
   margin: 0 auto;
   padding: 30px 25px 50px;
-<<<<<<< HEAD
-}
-
-/* Homepage Artist Grid */
-=======
 
 }
->>>>>>> origin/master
 
 .artist-grid {
   list-style: none;
   padding: 0;
   --columns: 4;
   display: grid;
-<<<<<<< HEAD
-  grid-template-columns: repeat(var(--columns), minmax(0, 1fr));
-=======
   grid-template-columns:
     repeat(var(--columns), minmax(0, 1fr));
->>>>>>> origin/master
   gap: 24px;
 }
 
 .artist-card {
-<<<<<<< HEAD
-  overflow: hidden;
   border: 1px solid var(--border);
   border-radius: var(--radius);
-  transition: transform 0.3s ease, border-color 0.3s ease;
-=======
-  border: 1px solid var(--border);
-  border-radius: var(--radius);
->>>>>>> origin/master
 }
 
 .artist-card:hover {
   transform: translateY(-6px);
   border-color: rgba(139, 92, 246, 0.6);
-<<<<<<< HEAD
-}
 
-.artist-card a {
-  display: block;
-  color: inherit;
-  text-decoration: none;
-=======
-
->>>>>>> origin/master
 }
 
 .artist-card .thumb {
@@ -121,15 +70,8 @@ main {
 }
 
 .artist-card img {
-<<<<<<< HEAD
-  display: block;
   width: 100%;
   aspect-ratio: 1 / 1;
-  object-fit: cover;
-=======
-  width: 100%;
-  aspect-ratio: 1 / 1;
->>>>>>> origin/master
   transition: transform 0.4s ease;
 }
 
@@ -143,121 +85,13 @@ main {
   font-size: 1.05rem;
   font-weight: 600;
   text-align: center;
-<<<<<<< HEAD
-  background: var(--surface);
 }
 
-/* Artist Details Page */
-
-.artist-detail {
-  display: grid;
-  grid-template-columns: 280px minmax(0, 1fr);
-  gap: 30px;
-  align-items: start;
-  margin-top: 20px;
-  padding: 30px;
-  background: var(--surface);
-  border: 1px solid var(--border);
-  border-radius: var(--radius);
-}
-
-.artist-photo {
-  display: block;
-  width: 100%;
-  max-width: 280px;
-  aspect-ratio: 1 / 1;
-  object-fit: cover;
-  border-radius: var(--radius);
-}
-
-.artist-info {
-  min-width: 0;
-}
-
-.artist-info h2 {
-  margin-bottom: 20px;
-  font-size: 2rem;
-  color: var(--head);
-  overflow-wrap: anywhere;
-}
-
-.artist-info h3 {
-  margin: 25px 0 12px;
-  font-size: 1.3rem;
-  color: var(--head);
-}
-
-/* Artist Information and Concert Tables */
-
-.artist-info table {
-  width: 100%;
-  margin: 15px 0 25px;
-  border-collapse: collapse;
-  background: var(--bg);
-  border: 1px solid var(--border);
-  table-layout: fixed;
-}
-
-.artist-info th,
-.artist-info td {
-  padding: 14px;
-  text-align: left;
-  vertical-align: top;
-  border: 1px solid var(--border);
-  overflow-wrap: anywhere;
-}
-
-.artist-info th {
-  background: #22243a;
-  color: var(--head);
-  font-weight: 700;
-}
-
-.artist-info td {
-  color: var(--text);
-}
-
-.artist-info .members,
-.artist-info .concert-dates {
-  padding-left: 20px;
-  margin: 0;
-  line-height: 1.8;
-}
-
-.artist-info .location {
-  text-transform: capitalize;
-}
-
-.artist-info table thead th:first-child {
-  width: 40%;
-}
-
-.artist-info table thead th:last-child {
-  width: 60%;
-}
-
-.artist-info p {
-  margin: 15px 0;
-  line-height: 1.6;
-}
-=======
-}
-
->>>>>>> origin/master
 
 @media (max-width: 1024px) {
   .artist-grid {
     --columns: 3;
   }
-<<<<<<< HEAD
-
-  .artist-detail {
-    grid-template-columns: 230px minmax(0, 1fr);
-    gap: 24px;
-    padding: 24px;
-  }
-=======
->>>>>>> origin/master
 }
 
 @media (max-width: 720px) {
@@ -274,58 +108,10 @@ main {
     padding: 10px 12px 12px;
     font-size: 0.95rem;
   }
-<<<<<<< HEAD
-
-  .artist-detail {
-    grid-template-columns: 1fr;
-    gap: 20px;
-    padding: 20px;
-  }
-
-  .artist-photo {
-    max-width: 220px;
-    margin: 0 auto;
-  }
-
-  .artist-info h2 {
-    font-size: 1.6rem;
-  }
-
-  .artist-info table {
-    margin-bottom: 20px;
-    font-size: 0.9rem;
-  }
-
-  .artist-info th,
-  .artist-info td {
-    padding: 10px;
-  }
-=======
->>>>>>> origin/master
 }
 
 @media (max-width: 420px) {
   .artist-grid {
     --columns: 1;
   }
-<<<<<<< HEAD
-
-  .artist-detail {
-    padding: 14px;
-  }
-
-  .artist-info h2 {
-    font-size: 1.4rem;
-  }
-
-  .artist-info table {
-    font-size: 0.8rem;
-  }
-
-  .artist-info th,
-  .artist-info td {
-    padding: 8px;
-  }
-=======
->>>>>>> origin/master
 }

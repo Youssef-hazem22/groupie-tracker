@@ -32,13 +32,13 @@ func fetchArtists() ([]Artist, error) {
 		return nil, err
 	}
 	defer resp.Body.Close()
-
-	err = json.NewDecoder(resp.Body).Decode(&artists)
+	var result []Artist
+	err = json.NewDecoder(resp.Body).Decode(&result)
 	if err != nil {
 		return nil, err
 	}
 
-	return artists, nil
+	return result, nil
 }
 func fetchRelations() ([]Relation, error) {
 	resp, err := client.Get(relationsurl)
