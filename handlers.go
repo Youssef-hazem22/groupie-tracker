@@ -31,6 +31,9 @@ func fetchArtists() ([]Artist, error) {
 	if err != nil {
 		return nil, err
 	}
+	if resp.StatusCode != http.StatusOK {
+		return nil, fmt.Errorf("unexpected code : %s", resp.Status)
+	}
 	defer resp.Body.Close()
 	var result []Artist
 	err = json.NewDecoder(resp.Body).Decode(&result)
@@ -126,14 +129,6 @@ func indexhandler(w http.ResponseWriter, r *http.Request) {
 	}
 
 }
-func findArtistByID(id int) *Artist {
-	for i := range artists {
-		if artists[i].ID == id {
-			return &artists[i]
-		}
-	}
-	return nil
-}
 func artistHandler(w http.ResponseWriter, r *http.Request) {
 	if r.URL.Path != "/artist" {
 		http.Error(w, "404 not found.", http.StatusNotFound)
@@ -158,4 +153,12 @@ func artistHandler(w http.ResponseWriter, r *http.Request) {
 		http.Error(w, "500 internal server error", http.StatusInternalServerError)
 	}
 
+}
+func findArtistByID(id int) *Artist {
+	for i := range artists {
+		if artists[i].ID == id {
+			return &artists[i]
+		}
+	}
+	return nil
 }
