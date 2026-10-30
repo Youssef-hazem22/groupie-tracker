@@ -22,3 +22,7 @@ type ArtistDetail struct {
 	Artist   *Artist
 	Concerts map[string][]string
 }
+type IndexData struct {
+	Artists []Artist
+	Query   string
+}

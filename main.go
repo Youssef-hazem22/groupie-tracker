@@ -1,31 +1,37 @@
 package main
 
 import (
+	"embed"
 	"html/template"
 	"log"
 	"net/http"
+	"os"
 )
 
+//go:embed templates/*
+var templatesFS embed.FS
+
 func main() {
+	if err := implementfetch(); err != nil {
+		log.Fatal(err)
+	}
+
 	var err error
-	err = implementfetch()
+	tmpl, err = template.ParseFS(templatesFS, "templates/*.html")
 	if err != nil {
 		log.Fatal(err)
 	}
 
-	tmpl, err = template.ParseFiles("templates/index.html")
-	if err != nil {
-		log.Fatal(err)
-	}
+	http.HandleFunc("GET /styling.css", func(w http.ResponseWriter, r *http.Request) {
+		http.ServeFileFS(w, r, templatesFS, "templates/styling.css")
+	})
+	http.HandleFunc("GET /{$}", indexhandler)
+	http.HandleFunc("GET /artist", artistHandler)
 
-	artistTmpl, err = template.ParseFiles("templates/artist.html")
-	if err != nil {
-		log.Fatal(err)
+	port := os.Getenv("PORT")
+	if port == "" {
+		port = "8080"
 	}
-	http.Handle("/styling.css", http.FileServer(http.Dir("templates")))
-	http.HandleFunc("/", indexhandler)
-	http.HandleFunc("/artist", artistHandler)
-
-	log.Println("server is running on http://localhost:8080")
-	log.Fatal(http.ListenAndServe(":8080", nil))
+	log.Println("server is running on port", port)
+	log.Fatal(http.ListenAndServe(":"+port, nil))
 }

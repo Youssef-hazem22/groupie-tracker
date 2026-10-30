@@ -7,23 +7,43 @@
     <link rel="stylesheet" href="/styling.css">
 </head>
 <body>
+
     <header class="site-header">
         <h1>Groupie Trackers</h1>
+        <p class="tagline">Discover your favorite artists and their concerts</p>
     </header>
 
     <main>
-        <ul class="artist-grid">
-            {{range .}}
-            <li class="artist-card">
-                <a href="/artist?id={{.ID}}">
-                    <div class="thumb">
-                        <img src="{{.Image}}" alt="{{.Name}}">
-                    </div>
-                    <h2 class="artist-name">{{.Name}}</h2>
-                </a>
-            </li>
-            {{end}}
-        </ul>
-    </main>
+    <form class="search-form" action="/" method="GET">
+        <input
+            type="search"
+            name="q"
+            value="{{.Query}}"
+            placeholder="Search by artist, member, album, year or city..."
+            aria-label="Search artists">
+        <button type="submit">Search</button>
+        {{if .Query}}<a class="clear-search" href="/">Clear</a>{{end}}
+    </form>
+
+    {{if .Artists}}
+    <ul class="artist-grid">
+        {{range .Artists}}
+        <li class="artist-card">
+            <a href="/artist?id={{.ID}}">
+                <div class="thumb">
+                    <img src="{{.Image}}" alt="{{.Name}}">
+                </div>
+                <h2 class="artist-name">{{.Name}}</h2>
+            </a>
+        </li>
+        {{end}}
+    </ul>
+    {{else}}
+    <p class="no-results">No artists found for "{{.Query}}".</p>
+    {{end}}
+</main>
+
+    <footer class="site-footer">Built with Go · Groupie Trackers</footer>
+
 </body>
 </html>

@@ -19,11 +19,10 @@ const (
 )
 
 var (
-	artists    []Artist
-	tmpl       *template.Template
-	artistTmpl *template.Template
-	relations  map[int]Relation
-	client     = &http.Client{Timeout: 10 * time.Second}
+	artists   []Artist
+	tmpl      *template.Template
+	relations map[int]Relation
+	client    = &http.Client{Timeout: 10 * time.Second}
 )
 
 func fetchArtists() ([]Artist, error) {
@@ -31,27 +30,28 @@ func fetchArtists() ([]Artist, error) {
 	if err != nil {
 		return nil, err
 	}
+	defer resp.Body.Close()
 	if resp.StatusCode != http.StatusOK {
 		return nil, fmt.Errorf("unexpected code : %s", resp.Status)
 	}
-	defer resp.Body.Close()
-	var result []Artist
-	err = json.NewDecoder(resp.Body).Decode(&result)
+	err = json.NewDecoder(resp.Body).Decode(&artists)
 	if err != nil {
 		return nil, err
 	}
 
-	return result, nil
+	return artists, nil
 }
 func fetchRelations() ([]Relation, error) {
 	resp, err := client.Get(relationsurl)
 	if err != nil {
 		return nil, err
 	}
+
+	defer resp.Body.Close()
+
 	if resp.StatusCode != http.StatusOK {
 		return nil, fmt.Errorf("unexpected code : %s", resp.Status)
 	}
-	defer resp.Body.Close()
 	var RELATION RelationsIndex
 	err = json.NewDecoder(resp.Body).Decode(&RELATION)
 	if err != nil {
@@ -116,27 +116,58 @@ func implementfetch() error {
 }
 
 func indexhandler(w http.ResponseWriter, r *http.Request) {
-	if r.URL.Path != "/" {
-		http.Error(w, "404 not found.", http.StatusNotFound)
-		return
-	}
-	if r.Method != http.MethodGet {
-		http.Error(w, "405 methodnotallowed", http.StatusMethodNotAllowed)
+	q := r.URL.Query().Get("q")
+
+	data := IndexData{
+		Artists: searchArtists(q),
+		Query:   q,
 	}
 
-	if err := tmpl.Execute(w, artists); err != nil {
+	if err := tmpl.ExecuteTemplate(w, "index.html", data); err != nil {
 		http.Error(w, "500 internal server error", http.StatusInternalServerError)
 	}
+}
 
+func searchArtists(query string) []Artist {
+	if len(query) > 100 {
+		query = query[:100]
+	}
+	query = strings.ToLower(strings.TrimSpace(query))
+	if query == "" {
+		return artists
+	}
+
+	var results []Artist
+	for _, a := range artists {
+		if artistMatches(a, query) {
+			results = append(results, a)
+		}
+	}
+	return results
+}
+
+func artistMatches(a Artist, q string) bool {
+	if strings.Contains(strings.ToLower(a.Name), q) ||
+		strings.Contains(strings.ToLower(a.FirstAlbum), q) ||
+		strings.Contains(strconv.Itoa(a.CreationDate), q) {
+		return true
+	}
+
+	for _, member := range a.Members {
+		if strings.Contains(strings.ToLower(member), q) {
+			return true
+		}
+	}
+
+	for location := range relations[a.ID].DatesLocations {
+		if strings.Contains(strings.ToLower(location), q) {
+			return true
+		}
+	}
+
+	return false
 }
 func artistHandler(w http.ResponseWriter, r *http.Request) {
-	if r.URL.Path != "/artist" {
-		http.Error(w, "404 not found.", http.StatusNotFound)
-		return
-	}
-	if r.Method != http.MethodGet {
-		http.Error(w, "405 methodnotallowed", http.StatusMethodNotAllowed)
-	}
 	artistid := r.URL.Query().Get("id")
 	Artistidint, err := strconv.Atoi(artistid)
 	if err != nil {
@@ -149,7 +180,7 @@ func artistHandler(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 	detail := artistdetails(artist)
-	if err := artistTmpl.Execute(w, detail); err != nil {
+	if err := tmpl.ExecuteTemplate(w, "artist.html", detail); err != nil {
 		http.Error(w, "500 internal server error", http.StatusInternalServerError)
 	}
 
